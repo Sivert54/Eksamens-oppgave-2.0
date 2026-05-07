@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>LAN Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>LAN – Spillgrupper</h1>
+</header>
+
+<main>
+
+    <section class="group">
+        <h2>Minecraft</h2>
+        <p>Bygging, survival og eventyr. Passer for alle nivåer.</p>
+        <button onclick="signup('Minecraft')">Meld meg på</button>
+    </section>
+
+    <section class="group">
+        <h2>Counter-Strike: GO</h2>
+        <p>Lagbasert FPS med turnering senere på kvelden.</p>
+        <button onclick="signup('CSGO')">Meld meg på</button>
+    </section>
+
+    <section class="group">
+        <h2>Valorant</h2>
+        <p>5v5 taktisk skytespill. Krever registrering før turnering.</p>
+        <button onclick="signup('Valorant')">Meld meg på</button>
+    </section>
+
+</main>
+
+<script>
+function signup(game) {
+    fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ game })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Du er meldt på " + game + "!");
+    })
+    .catch(err => {
+        console.error("Feil:", err);
+        alert("Noe gikk galt!");
+    });
+}
+</script>
+
+</body>
+</html>
